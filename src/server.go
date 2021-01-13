@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"math"
 )
+
 //GlobalVariables ...
 type GlobalVariables struct {
     Port	string	`json:"port"`
@@ -81,10 +82,6 @@ func ServeFiles(w http.ResponseWriter, r *http.Request){
 
 		message := r.FormValue("message")
 		res := splite(message,";")
-
-
-		fmt.Println("----------------------------------")
-		fmt.Println("Message from Client: ", res)
 		box := Answers{}
 		for i := 0; i < len(res); i++ {
 			answer := Answer{Postfix: Postfix(res[i]),Prefix:PostfixToPrefix(res[i]),Infix:PostfixToInfix(res[i]),Answer:CalcPostfix(res[i])}
@@ -319,7 +316,7 @@ func Calc(elem string) float64 {
 			if(array[i] == "-") {stack = append(stack,b-a)}
 			if(array[i] == "*") {stack = append(stack,b*a)}
 			if(array[i] == "/") {stack = append(stack,b/a)}
-			if(array[i] == "^") {stack = append(stack,math.Pow(a,b))}
+			if(array[i] == "^") {stack = append(stack,math.Pow(b,a))}
 
 		}
 	}
@@ -336,7 +333,7 @@ func Calc(elem string) float64 {
 			if(array[len(array)-1] == "-") {stack = append(stack,b-a)}
 			if(array[len(array)-1] == "*") {stack = append(stack,b*a)}
 			if(array[len(array)-1] == "/") {stack = append(stack,b/a)}
-			if(array[len(array)-1] == "^") {stack = append(stack,math.Pow(a,b))}	
+			if(array[len(array)-1] == "^") {stack = append(stack,math.Pow(b,a))}	
 	}
 	
 	return stack[0]

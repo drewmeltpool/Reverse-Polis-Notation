@@ -1,12 +1,17 @@
 const url = "127.0.0.1:3002"
 
-var inputForm = document.getElementById("inputForm")
+const inputForm = document.getElementById("inputForm")
+const clear = document.getElementById("clear")
+
+clear.addEventListener("click", () => {
+    const inputText = document.getElementById("message")
+    inputText.value = ""
+    const result = document.getElementById("serverMessageBox")
+    result.innerHTML = ""
+})
 
 inputForm.addEventListener("submit", (e)=>{
-
-    //prevent auto submission
     e.preventDefault()
-
     const formdata = new FormData(inputForm)
     fetch(url,{
         method:"POST",
@@ -21,12 +26,12 @@ inputForm.addEventListener("submit", (e)=>{
             const jsonList = JSON.parse(data).Items
 
             let list = document.createElement("ul")
-            list.className = "list"
+            list.className = "list-group"
             result.appendChild(list)
             
             for (let i = 0; i < jsonList.length; i++) {
                 let item = document.createElement("li");
-                item.className = "list__item"
+                item.className = "list-group-item"
 
                 for(let name in jsonList[i]){
                     let type = document.createElement("p");
@@ -38,17 +43,11 @@ inputForm.addEventListener("submit", (e)=>{
                     type.appendChild(value)
                     item.appendChild(type)
                 }
-
                 list.append(item)
             }
-
             result.appendChild(list)
         }
     ).catch(
         error => console.error(error)
     )
-
-
-
-
 })

@@ -15,17 +15,16 @@
             margin: 0;
             padding: 0;
         }
-        .list__item{
-            list-style: none;
-            border: 1px solid #e1e4e8;
-            border-radius: 6px;
-            margin-top: 30px;
-            padding: 10px;
+        .list-group-item{
+            overflow-y: auto;
+            text-align-last: left;
         }
         .text{
             margin: 0;
-            text-align-last: left;
+            padding: 5px;
+            margin: 5px 0;
             font-weight: 500;
+            border: 1px solid #e1e4e8;
         }
         .value{
             font-weight: 300;
@@ -37,6 +36,16 @@
         .heading-big{
             font-size: 48px;
         }
+        .form-group{
+            width: 100%;
+            display: flex;
+        }
+        .mb-2{
+            margin: 0 !important;
+        }
+        .list-group > .list-group-item:nth-child(odd){
+            background-color: #fafafa;
+        }
     </style>
 </head>
 <body style="background-color: #fff;">
@@ -44,18 +53,24 @@
     <div class="container">
         <h1 class="heading heading-big">Postfix</h1>
         <div id="formBody">
-            <form  method="POST" id="inputForm">
-                <div class="mb-3">
-                  <label for="message" class="form-label">Postfix form</label>
-                  <input name="message" class="form-control" value="" type="text" id="message">
-                  <div id="emailHelp" class="form-text">Input your samples. If you want to write several use ";"</div>
+            <form  method="POST" id="inputForm" class="form-group">
+                
+                
+                
+                <label for="message">Postfix form</label>
+                <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="1 2 +;3 4 +" id="message" name="message">
+                        <button type="submit" class="btn btn-primary mb-2">Calculate</button>    
                 </div>
-                <button type="submit" class="btn btn-primary">Calculate</button>
+                  <button class="btn btn-dark" type="button" id="clear">Clear</button>
             </form>
         </div>
         <h2 class="heading">Results</h2>
         <div id="serverMessageBox" style="text-align: center;"></div>
     </div>
+    
+    
+    
     
 </body>
 <script src="../static/main.js"></script>
